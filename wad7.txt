@@ -1,16 +1,81 @@
-STEP 1: INSTALL REQUIREMENTS
-Install Node.js
-sudo apt update
-sudo apt install nodejs npm -y
-Install MongoDB
+Yes, the overall process is the same on Windows, but the commands are slightly different.
+Here’s the proper Windows version step-by-step for your CRUD API project using Node.js, Express, and MongoDB.
 
-STEP 2: CREATE PROJECT
+---
+
+# STEP 1: Install Requirements on Windows
+
+## 1. Install Node.js
+
+Download from:
+
+[Node.js Official Website](https://nodejs.org?utm_source=chatgpt.com)
+
+* Install the LTS version
+* Keep all settings default
+* After installation, open Command Prompt and check:
+
+```bash
+node -v
+npm -v
+```
+
+---
+
+## 2. Install MongoDB
+
+Download MongoDB Community Server:
+
+[MongoDB Community Server](https://www.mongodb.com/try/download/community?utm_source=chatgpt.com)
+
+During installation:
+
+* Select **Complete**
+* Enable **Install MongoDB Compass**
+* Finish installation
+
+Check MongoDB:
+
+```bash
+mongod --version
+```
+
+---
+
+# STEP 2: Create Project
+
+Open Command Prompt:
+
+```bash
 mkdir crud-api
 cd crud-api
-npm init -y
-npm install express mongoose body-parser
+```
 
-STEP 3: CREATE FILE → server.js
+Initialize project:
+
+```bash
+npm init -y
+```
+
+Install packages:
+
+```bash
+npm install express mongoose body-parser
+```
+
+---
+
+# STEP 3: Create server.js
+
+Inside `crud-api` folder:
+
+```bash
+notepad server.js
+```
+
+Paste this code:
+
+```javascript
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -62,54 +127,169 @@ app.delete("/deleteUser/:id", async (req, res) => {
 app.listen(3000, () => {
     console.log("Server running on port 3000");
 });
+```
 
+Save:
 
+* Press `CTRL + S`
+* Close Notepad
 
-STEP 4: RUN SERVER
+---
+
+# STEP 4: Start MongoDB
+
+Open another Command Prompt:
+
+```bash
+mongod
+```
+
+Keep this window open.
+
+---
+
+# STEP 5: Run Server
+
+In project folder:
+
+```bash
 node server.js
-👉 Output:
+```
+
+Output:
+
+```bash
 Server running on port 3000
+```
 
+---
 
-1. CREATE (POST)
+# STEP 6: Test APIs
 
-👉 URL:
+You can use:
 
+* [Postman](https://www.postman.com/downloads/?utm_source=chatgpt.com)
+* Thunder Client in [Visual Studio Code](https://code.visualstudio.com?utm_source=chatgpt.com)
+
+---
+
+# 1. CREATE API
+
+### URL
+
+```bash
 http://localhost:3000/addUser
+```
 
-👉 Method: POST
+### Method
 
-👉 Body (JSON):
+```bash
+POST
+```
 
+### Body → raw → JSON
+
+```json
 {
   "name": "Abhishek",
   "email": "abhi@gmail.com"
 }
-✅ 2. READ (GET)
+```
 
-👉 URL:
+---
 
+# 2. READ API
+
+### URL
+
+```bash
 http://localhost:3000/getUsers
+```
 
-👉 Method: GET
+### Method
 
-👉 Output:
+```bash
+GET
+```
 
-List of users with _id
-✅ 3. UPDATE (PUT)
-👉 URL:
+---
+
+# 3. UPDATE API
+
+### URL
+
+```bash
 http://localhost:3000/updateUser/<id>
-👉 Example:
+```
+
+Example:
+
+```bash
 http://localhost:3000/updateUser/661234abcd1234
-👉 Method: PUT
-👉 Body (JSON):
+```
+
+### Method
+
+```bash
+PUT
+```
+
+### Body
+
+```json
 {
   "name": "Updated Name",
   "email": "updated@gmail.com"
 }
-✅ 4. DELETE (DELETE)
-👉 URL:
+```
+
+---
+
+# 4. DELETE API
+
+### URL
+
+```bash
 http://localhost:3000/deleteUser/<id>
-👉 Example:
-http://localhost:3000/deleteUser/661234abcd1234
-👉 Method: DELETE
+```
+
+### Method
+
+```bash
+DELETE
+```
+
+---
+
+# Important Difference Between Ubuntu & Windows
+
+| Ubuntu/Linux          | Windows                     |
+| --------------------- | --------------------------- |
+| sudo apt install      | Download .exe installer     |
+| Terminal              | Command Prompt / PowerShell |
+| Linux package manager | Manual installation         |
+| mongod service        | MongoDB Windows Service     |
+
+---
+
+# Optional Better Command
+
+Instead of:
+
+```bash
+node server.js
+```
+
+Install nodemon:
+
+```bash
+npm install -g nodemon
+```
+
+Run:
+
+```bash
+nodemon server.js
+```
+
+This auto-restarts server whenever you save changes.
